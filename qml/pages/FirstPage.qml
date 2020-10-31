@@ -25,7 +25,7 @@ Page {
             }
         })(xhr);
         xhr.open('GET', "https://opendata-download-radar.smhi.se/api/version/latest/area/sweden/product/comp/"
-                        +now.getFullYear()+"/"+(now.getMonth()+1)+"/"+now.getDate()+"?format=png", true);
+                        +now.getUTCFullYear()+"/"+(now.getUTCMonth()+1)+"/"+now.getUTCDate()+"?format=png", true);
         xhr.send('');
     }
 
@@ -34,7 +34,7 @@ Page {
     function refresh() {
         if(visible)
         {
-            now = new Date(new Date() - new Date().getTimezoneOffset()*60000)
+            now = new Date()
         }
     }
 
