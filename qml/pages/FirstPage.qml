@@ -161,6 +161,7 @@ Page {
 
         IconButton {
             icon.source: "image://theme/icon-m-sync"
+            z: 100
             anchors.right: parent.right
             anchors.rightMargin: Theme.itemSizeSmall
             anchors.bottom: sourceLabel.top
