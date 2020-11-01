@@ -5,43 +5,16 @@ import Nemo.Thumbnailer 1.0
 
 Page {
     id: page
-    property date now
-    property bool initialized: false
-    property var radarImages
-    property int numRadarImages
 
-    onNowChanged: {
-        console.log(now)
-        // TODO: reset stuff if day changed
+    onVisibleChanged: appWin.refresh()
 
-        var xhr = new XMLHttpRequest;
-        xhr.onreadystatechange = (function(myxhr) {
-            return function() {
-                if(myxhr.readyState === 4)
-                {
-                    console.log("woop", myxhr.responseText)
-                    radarImages = JSON.parse(myxhr.responseText).files
-                }
-            }
-        })(xhr);
-        xhr.open('GET', "https://opendata-download-radar.smhi.se/api/version/latest/area/sweden/product/comp/"
-                        +now.getUTCFullYear()+"/"+(now.getUTCMonth()+1)+"/"+now.getUTCDate()+"?format=png", true);
-        xhr.send('');
-    }
-
-    onVisibleChanged: refresh()
-
-    function refresh() {
-        if(visible)
-        {
-            now = new Date()
+    Connections {
+        target: appWin
+        onNumRadarImagesChanged: {
+            radarImage.index = appWin.numRadarImages-1
         }
     }
 
-    onRadarImagesChanged: {
-        numRadarImages = radarImages.length
-        radarImage.index = numRadarImages-1
-    }
 
     allowedOrientations: Orientation.Portrait
 
@@ -166,7 +139,7 @@ Page {
             anchors.rightMargin: Theme.itemSizeSmall
             anchors.bottom: sourceLabel.top
             anchors.bottomMargin: Theme.itemSizeSmall
-            onClicked: refresh()
+            onClicked: appWin.refresh()
         }
 
 
@@ -189,11 +162,11 @@ Page {
                 }
                 else if(mouseX > (Screen.width-Theme.paddingMedium))
                 {
-                    radarImage.index = numRadarImages-1
+                    radarImage.index = appWin.numRadarImages-1
                 }
                 else
                 {
-                    radarImage.index = Math.floor(((mouseX-Theme.paddingMedium)*numRadarImages)
+                    radarImage.index = Math.floor(((mouseX-Theme.paddingMedium)*appWin.numRadarImages)
                                                   /(Screen.width-2*Theme.paddingMedium))
                 }
             }
