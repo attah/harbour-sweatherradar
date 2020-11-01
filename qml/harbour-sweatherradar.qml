@@ -9,16 +9,18 @@ ApplicationWindow
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.Portrait
 
-    property date now
+    property date now: new Date()
     property var radarImages
     property int numRadarImages
 
 
     function refresh() {
-        if(visible)
+        var tmp = new Date()
+        if(tmp.getTime() > (now.getTime()+60*1000))
         {
-            now = new Date()
+            now = tmp
         }
+
     }
 
     onNowChanged: {

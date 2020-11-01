@@ -6,7 +6,13 @@ import Nemo.Thumbnailer 1.0
 Page {
     id: page
 
-    onVisibleChanged: appWin.refresh()
+    onVisibleChanged: {
+        if (visible)
+        {
+            appWin.refresh()
+        }
+    }
+
 
     Connections {
         target: appWin
@@ -139,7 +145,10 @@ Page {
             anchors.rightMargin: Theme.itemSizeSmall
             anchors.bottom: sourceLabel.top
             anchors.bottomMargin: Theme.itemSizeSmall
-            onClicked: appWin.refresh()
+            onClicked: {
+                radarImage.index = appWin.numRadarImages-1
+                appWin.refresh()
+            }
         }
 
 
