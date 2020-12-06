@@ -24,7 +24,6 @@ ApplicationWindow
     }
 
     onNowChanged: {
-        console.log(now)
         // TODO: reset stuff if day changed
 
         var xhr = new XMLHttpRequest;
@@ -32,7 +31,6 @@ ApplicationWindow
             return function() {
                 if(myxhr.readyState === 4)
                 {
-                    console.log("woop", myxhr.responseText)
                     radarImages = JSON.parse(myxhr.responseText).files
                 }
             }

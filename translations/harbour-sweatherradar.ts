@@ -4,7 +4,11 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Källa: SMHI</source>
+        <source>Radar: SMHI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karta: Lantmäteriet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

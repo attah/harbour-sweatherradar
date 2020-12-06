@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtGraphicalEffects 1.0
 
 CoverBackground {
     id: cover
@@ -14,13 +15,24 @@ CoverBackground {
 
     Image {
         id: coverBg
-        source: "../pages/basemap.png"
+        source: "../pages/highres.png"
         property real factor: Math.max(parent.height/887, parent.width/471)
         height: 887*factor
         width: 471*factor
         anchors.centerIn: parent
         opacity: 0.3
-        Component.onCompleted: console.log(factor, height, width)
+    }
+
+    Image {
+        id: coverCities
+        source: "../pages/cities_borders.png"
+        anchors.fill: coverBg
+    }
+
+    ColorOverlay {
+        anchors.fill: coverCities
+        source: coverCities
+        color: Theme.highlightColor
     }
 
     Image {

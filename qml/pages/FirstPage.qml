@@ -39,18 +39,17 @@ Page {
 
         Image {
             id: bg
-            source: "basemap.png"
+            source: "highres.png"
             property real factor: Math.max(Screen.height/887, Screen.width/471)
             height: 887*factor
             width: 471*factor
             anchors.centerIn: parent
             opacity: 0.3
-            Component.onCompleted: console.log(factor, height, width)
         }
 
         Image {
             id: cities
-            source: "cities.png"
+            source: "cities_borders.png"
             anchors.fill: bg
         }
 
@@ -72,8 +71,6 @@ Page {
                 timer.start()
             }
 
-            onSourceChanged: console.log(source)
-
             Timer {
                 id: timer
                 interval: 100
@@ -83,7 +80,6 @@ Page {
             }
 
             function doUpdate() {
-                console.log("unup", index, status)
                 if(!timer.running)
                 {
                     if(status == Image.Loading)
@@ -154,7 +150,7 @@ Page {
 
         Label {
             id: sourceLabel
-            text: qsTr("Källa: SMHI")
+            text: qsTr("Radar: SMHI")+"\n"+qsTr("Karta: Lantmäteriet")
             color: Theme.highlightBackgroundColor
             font.pixelSize: Theme.fontSizeExtraSmall
             anchors.bottom: parent.bottom
