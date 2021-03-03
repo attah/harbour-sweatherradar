@@ -101,37 +101,12 @@ Page {
             }
         }
 
-        Rectangle
-        {
-            height: 0.1*Screen.height
-            width: bg.width
-            anchors.horizontalCenter: bg.horizontalCenter
-            anchors.top: parent.top
-            color: "#10000000"
+        Image {
+            id: actualRadarImage
+            opacity: 0.5
 
-        }
-
-        Rectangle
-        {
-            id: croprect
-            height: 0.9*parent.height
-            width: parent.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            clip: true
-            color: "#00000000"
-
-            Image {
-                id: actualRadarImage
-                height: bg.height
-                width: bg.width
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: flick.height*-0.05
-
-                cache: true
-            }
-
+            anchors.fill: bg
+            cache: true
         }
 
         IconButton {
